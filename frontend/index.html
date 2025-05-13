@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Math Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Math Calculator</h1>
+  <div class="container">
+    <select id="operation">
+      <option value="add">Add</option>
+      <option value="subtract">Subtract</option>
+      <option value="multiply">Multiply</option>
+      <option value="divide">Divide</option>
+      <option value="power">Power</option>
+      <option value="sqrt">Square Root</option>
+      <option value="log">Logarithm</option>
+      <option value="factorial">Factorial</option>
+      <option value="sin">Sine</option>
+      <option value="cos">Cosine</option>
+      <option value="tan">Tangent</option>
+    </select>
+    <input type="number" id="input1" placeholder="Input 1">
+    <input type="number" id="input2" placeholder="Input 2 (if needed)">
+    <button onclick="calculate()">Calculate</button>
+    <p id="result"></p>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
