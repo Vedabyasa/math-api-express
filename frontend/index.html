@@ -1,31 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Math Calculator</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f0f2f5;
+      font-family: Arial, sans-serif;
+    }
+    .calculator {
+      padding: 2rem;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 320px;
+    }
+    select, input, button {
+      width: 100%;
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #result {
+      margin-top: 1rem;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
-  <h1>Math Calculator</h1>
-  <div class="container">
-    <select id="operation">
+  <div class="calculator">
+    <h2>Math Calculator</h2>
+
+    <select id="operation" onchange="toggleInputFields()">
       <option value="add">Add</option>
       <option value="subtract">Subtract</option>
       <option value="multiply">Multiply</option>
       <option value="divide">Divide</option>
       <option value="power">Power</option>
       <option value="sqrt">Square Root</option>
-      <option value="log">Logarithm</option>
       <option value="factorial">Factorial</option>
-      <option value="sin">Sine</option>
-      <option value="cos">Cosine</option>
-      <option value="tan">Tangent</option>
+      <option value="sin">Sin</option>
+      <option value="cos">Cos</option>
+      <option value="tan">Tan</option>
     </select>
-    <input type="number" id="input1" placeholder="Input 1">
-    <input type="number" id="input2" placeholder="Input 2 (if needed)">
+
+    <input type="number" id="input1" placeholder="Enter first number" />
+    <input type="number" id="input2" placeholder="Enter second number" />
+
     <button onclick="calculate()">Calculate</button>
+
     <p id="result"></p>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>

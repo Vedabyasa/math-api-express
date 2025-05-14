@@ -1,13 +1,24 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const cors = require('cors');
 const mathRoutes = require('./routes/math');
 
 const app = express();
-app.use(bodyParser.json());
+const PORT = process.env.PORT || 3000;
 
+app.use(cors());
+app.use(express.json());
+
+// Serve static files from frontend folder
+app.use(express.static('frontend'));
+
+// API routes
 app.use('/api/math', mathRoutes);
 
-const PORT = process.env.PORT || 3000;
+// Fallback to index.html for any non-API route (optional)
+app.get('*', (req, res) => {
+  res.sendFile(__dirname + '/frontend/index.html');
+});
+
 app.listen(PORT, () => {
-  console.log(`Math API server is running on port ${PORT}`);
+  console.log(`Server running at http://localhost:${PORT}`);
 });
