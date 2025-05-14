@@ -22,6 +22,14 @@
       text-align: center;
       width: 320px;
     }
+    .welcome, .time {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+    h2 {
+      margin-bottom: 1rem;
+    }
     select, input, button {
       width: 100%;
       margin: 0.5rem 0;
@@ -48,6 +56,9 @@
 </head>
 <body>
   <div class="calculator">
+    <div id="greeting" class="welcome">Welcome</div>
+    <div id="currentTime" class="time">Time: --:--</div>
+
     <h2>Math Calculator</h2>
 
     <select id="operation" onchange="toggleInputFields()">
@@ -70,6 +81,32 @@
 
     <p id="result"></p>
   </div>
+
+  <script>
+    // Greeting based on time
+    window.addEventListener('DOMContentLoaded', () => {
+      const greetingDiv = document.getElementById("greeting");
+      const hour = new Date().getHours();
+      let greeting = "Welcome";
+      if (hour >= 5 && hour < 12) {
+        greeting = "🌅 Good morning";
+      } else if (hour >= 12 && hour < 18) {
+        greeting = "🌞 Good afternoon";
+      } else {
+        greeting = "🌙 Good evening";
+      }
+      greetingDiv.textContent = `${greeting}, welcome to the Math Calculator!`;
+    });
+
+    // Live Clock
+    function updateTime() {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString();
+      document.getElementById("currentTime").textContent = `Time: ${timeString}`;
+    }
+    setInterval(updateTime, 1000);
+    updateTime(); // Initial call
+  </script>
 
   <script src="script.js"></script>
 </body>
