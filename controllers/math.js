@@ -1,3 +1,13 @@
+let history = []; // Store recent calculations (up to 10 entries)
+
+// Utility to maintain recent history
+function addToHistory(entry) {
+  history.unshift(entry);
+  if (history.length > 10) history.pop(); // Keep only last 10
+}
+
+// === MAIN OPERATIONS ===
+
 exports.add = (req, res) => {
   const { a, b } = req.body;
   res.json({ result: a + b });
@@ -20,8 +30,8 @@ exports.divide = (req, res) => {
 };
 
 exports.power = (req, res) => {
-  const { base, exponent } = req.body;
-  res.json({ result: Math.pow(base, exponent) });
+  const { a, b } = req.body; // fix: match frontend
+  res.json({ result: Math.pow(a, b) });
 };
 
 exports.sqrt = (req, res) => {
@@ -38,11 +48,13 @@ exports.log = (req, res) => {
 };
 
 exports.factorial = (req, res) => {
-  const { n } = req.body;
-  if (n < 0 || !Number.isInteger(n)) return res.status(400).json({ error: "Invalid input" });
+  const { value } = req.body; // fix: match frontend
+  if (value < 0 || !Number.isInteger(value)) {
+    return res.status(400).json({ error: "Invalid input" });
+  }
 
   let result = 1;
-  for (let i = 2; i <= n; i++) result *= i;
+  for (let i = 2; i <= value; i++) result *= i;
   res.json({ result });
 };
 
@@ -59,4 +71,20 @@ exports.cos = (req, res) => {
 exports.tan = (req, res) => {
   const { value } = req.body;
   res.json({ result: Math.tan(value) });
+};
+
+// === HISTORY SUPPORT ===
+
+exports.history = (req, res) => {
+  const { operation, input, result } = req.body;
+  if (!operation || !input || result === undefined) {
+    return res.status(400).json({ error: "Invalid history format" });
+  }
+
+  addToHistory({ operation, input, result });
+  res.json({ message: "Saved to history" });
+};
+
+exports.getHistory = (req, res) => {
+  res.json(history);
 };

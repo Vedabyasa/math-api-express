@@ -11,7 +11,11 @@ router.post('/sqrt', mathController.sqrt);
 router.post('/log', mathController.log);
 router.post('/factorial', mathController.factorial);
 
-module.exports = router;
 router.post('/sin', mathController.sin);
 router.post('/cos', mathController.cos);
 router.post('/tan', mathController.tan);
+
+router.post('/history', mathController.history);
+router.get('/history', mathController.getHistory);
+
+module.exports = router;
